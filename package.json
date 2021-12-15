@@ -5,7 +5,7 @@
   "main": "index.html",
   "scripts": {
     "start": "parcel 1.12.3 index.html",
-    "build": "parcel 1.12.3 build index.html --out-dir ./dist"
+    "build": "parcel build index.html --dist-dir ./dist"
   },
   "author": "Ciaran O'Rourke",
   "license": "ISC",
