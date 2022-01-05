@@ -4,7 +4,7 @@ import View from './view.js';
 
 class RecipeView extends View {
   parentEl = document.querySelector('.recipe');
-  errorMessage = 'No recipes found for your query. Please try again!';
+  errorMessage = 'No recipe found for your query. Please try again!';
   successMessage =
     'Start by searching for a recipe or an ingredient. Have fun!';
 
