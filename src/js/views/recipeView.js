@@ -8,6 +8,9 @@ class RecipeView extends View {
   successMessage =
     'Start by searching for a recipe or an ingredient. Have fun!';
 
+  // Markup to be used in overall markup of RecipeView
+  // For an ingredient, if ing.quantity exists, it is converted to a fraction.
+  // The unit and description are also displayed.
   generateMarkupIngredients = function (ing) {
     return `<li class="recipe__ingredient">
                 <svg class="recipe__icon">
@@ -25,6 +28,12 @@ class RecipeView extends View {
               </li>`;
   };
 
+  // Main markup
+  // Image is displayed (alt title),
+  // along with recipe title, cooking time and number of servings.
+  // If recipe has a key, display as user's own recipe.
+  // If recipe is bookmarked, display this.
+  // ALL ingredients are then listed, along with publisher and source url.
   generateMarkup() {
     return `<figure class="recipe__fig">
       <img src="${this.data.image}" alt="${
@@ -53,7 +62,7 @@ class RecipeView extends View {
               this.data.servings
             }</span>
             <span class="recipe__info-text">servings</span>
-
+            
             <div class="recipe__info-buttons">
               <button data-servings=${
                 this.data.servings - 1
@@ -123,9 +132,12 @@ class RecipeView extends View {
 
   addHandlerServings(handler) {
     this.parentEl.addEventListener('click', function (e) {
+      // btn is closest ancestor of e.target that matches selector
       const btn = e.target.closest('.btn--tiny');
       if (!btn) return;
 
+      // If btn exists, numServings equals the number value of data-servings,
+      // or 1, whichever is greater
       const numServings = Math.max(1, Number(btn.dataset.servings));
       handler(numServings);
     });

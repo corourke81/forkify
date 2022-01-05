@@ -1,8 +1,15 @@
 import icons from '../../img/icons.svg';
 
+// View is the parent of all other classes
 export default class View {
   data;
 
+  // Clears view (this.parentEl)
+  clear() {
+    this.parentEl.innerHTML = '';
+  }
+
+  // renders view
   render(data) {
     if (!data || (Array.isArray(data) && data.length === 0))
       return this.renderError();
@@ -13,14 +20,20 @@ export default class View {
     this.parentEl.insertAdjacentHTML('afterbegin', markup);
   }
 
+  // Updates view where changes have occurred
   update(data) {
     this.data = data;
+    // Generate new markup
     const newMarkup = this.generateMarkup();
 
+    // Create new DOM-like structure
     const newDOM = document.createRange().createContextualFragment(newMarkup);
     const newElements = Array.from(newDOM.querySelectorAll('*'));
     const curElements = Array.from(this.parentEl.querySelectorAll('*'));
 
+    // Compare elements of the above arrays
+    // If different, change textContent of current element to
+    // text content of new element
     newElements.forEach((newEl, i) => {
       const curEl = curElements[i];
       if (
@@ -46,10 +59,6 @@ export default class View {
     </div>`;
     this.clear();
     this.parentEl.insertAdjacentHTML('afterbegin', markup);
-  }
-
-  clear() {
-    this.parentEl.innerHTML = '';
   }
 
   renderError() {

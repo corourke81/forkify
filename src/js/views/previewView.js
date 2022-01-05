@@ -2,6 +2,10 @@ import View from './view.js';
 import icons from '../../img/icons.svg';
 
 export default class previewView extends View {
+  // Takes data from View, and returns list of recipe items with image,
+  // title, publisher.
+  // If recipe id matches that of page, highlight that item.
+  // If recipe key exists, mark recipe as user's own recipe.
   generateMarkup() {
     const id = window.location.hash.slice(1);
 
